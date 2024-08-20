@@ -1,11 +1,17 @@
 import { useState } from 'react'
 
 function App() {
-  
+
+   
 
   return (
     <>
-      <p className='text-4xl m-5 p-6 drop-shadow-xl font-bold text-purple-800'>Hello world</p>
+
+      <div className='bg-[#ee9d3a] flex flex-col justify-center justify-items-center items-center rounded-xl sm:flex-row shadow-md shadow-pink-300'>
+        <h1 className='text-lg text-center font-Anton pt-6 text-pink-900 tracking-wider'>Random Password Generator</h1>
+        <img src="secure.svg" alt="" className='w-7/12 mx-auto py-4 drop-shadow-lg' />
+
+      </div>
     </>
   )
 }

@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily:{
+        'bungeeTint':["Bungee Tint, sans-serif"],
+        'Anton':["Anton,sans-serif"],
+      }
+    },
   },
   plugins: [],
 }
