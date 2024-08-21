@@ -7,20 +7,25 @@ function App() {
   const [number, setNumber] = useState(false);
   const [symbols, setSymbols] = useState(false);
   const [password, setPassword] = useState("");
+  const [uppercase,setUppercase] =useState(false);
 
   const pwRef=useRef(null);
 
   const generatePassword = useCallback(() => {
     let pw = "";
-    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    let str = "abcdefghijklmnopqrstuvwxyz"
     let num = "1234567890";
     let sym = "@#$%&*!_-+|";
+    let up="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     if (number) {
       str += num;
     }
     if (symbols) {
       str += sym;
+    }
+    if (uppercase) {
+      str += up;
     }
 
     for (let i = 1; i <= length; i++) {
@@ -122,12 +127,29 @@ function App() {
 
           </div>
 
+          <div className='m-2'>
+
+            <input
+              type="checkbox"
+              defaultChecked={uppercase}
+              className=" h-3 w-4 border rounded-md transition duration-200"
+              onChange={() => {
+                setUppercase((prev) => !prev)
+              }}
+            />
+
+            <label htmlFor="Uppercase"
+              className='text-pink-900 font-semibold font-serif p-2'>
+              Include uppercase
+            </label>
+
+          </div>
+         
+
           <button className='bg-blue-600 p-2 mt-4 rounded-lg font-semibold  text-blue-50 hover:bg-blue-900 active:bg-blue-300 active:text-blue-800 transition duration-2000'
           onClick={generatePassword}>
             Generate Password
           </button>
-
-
 
         </div>
 
