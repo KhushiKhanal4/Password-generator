@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 function App() {
 
@@ -8,27 +8,40 @@ function App() {
   const [symbols, setSymbols] = useState(false);
   const [password, setPassword] = useState("");
 
-  const gneratePassword = useCallback(() => {
+  const pwRef=useRef(null);
+
+  const generatePassword = useCallback(() => {
     let pw = "";
-    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
     let num = "1234567890";
     let sym = "@#$%&*!_-+|";
 
-    if (setNumber) {
+    if (number) {
       str += num;
     }
-    if (setSymbols) {
-      str += symbols;
+    if (symbols) {
+      str += sym;
     }
 
     for (let i = 1; i <= length; i++) {
-      let char = Math.floor(Math.random * str.length + 1);
-      pass += str.charAt(char);
+      let char = Math.floor(Math.random() * str.length + 1);
+      pw += str.charAt(char);
     }
-    setPassword(pass);
 
+    setPassword(pw);
 
   }, [length, number, symbols, setPassword])
+
+  useEffect(()=>{
+    generatePassword()
+  },[length,number,symbols,generatePassword])
+
+  const CopytoClipboard=useCallback(() => {
+    pwRef.current?.select()
+    window.navigator.clipboard.writeText(password)
+  },[password])
+
+
 
 
   return (
@@ -46,11 +59,14 @@ function App() {
             type="text"
             value={password}
             placeholder='Password'
-            className='p-2 my-3 rounded-s-lg bg-[#f7ddc3] sm:w-10/12  xl:w-10/12 text-pink-900'
+            className='p-2 my-3 rounded-s-lg bg-[#f7ddc3] sm:w-10/12  xl:w-10/12 text-pink-900 outline-none transition-all'
+            ref={pwRef}
             readOnly
           />
 
-          <button className='bg-[#f7ddc3] p-2 -ml-3 rounded-e-lg font-seif font-semibold  text-pink-900'>
+          <button 
+          onClick={CopytoClipboard}
+          className='bg-blue-600 p-2 -ml-3 rounded-e-lg font-semibold  text-blue-50 hover:bg-blue-900 active:bg-blue-300 active:text-blue-800 transition duration-2000'>
             Copy
           </button>
 
@@ -74,7 +90,7 @@ function App() {
               defaultChecked={number}
               className=" h-3 w-4  border  rounded-md transition duration-200"
               onChange={() => {
-                setNumber((prev) = !prev)
+                setNumber((prev) => !prev)
               }}
             />
 
@@ -92,7 +108,7 @@ function App() {
               defaultChecked={symbols}
               className=" h-3 w-4 border rounded-md transition duration-200"
               onChange={() => {
-                setSymbols((prev) = !prev)
+                setSymbols((prev) => !prev)
               }}
             />
 
