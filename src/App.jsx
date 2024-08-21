@@ -35,7 +35,7 @@ function App() {
 
     setPassword(pw);
 
-  }, [length, number, symbols, setPassword])
+  }, [length, number, symbols,uppercase, setPassword])
 
   // useEffect(()=>{
   //   generatePassword()
