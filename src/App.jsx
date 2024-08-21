@@ -32,9 +32,9 @@ function App() {
 
   }, [length, number, symbols, setPassword])
 
-  useEffect(()=>{
-    generatePassword()
-  },[length,number,symbols,generatePassword])
+  // useEffect(()=>{
+  //   generatePassword()
+  // },[length,number,symbols,generatePassword])
 
   const CopytoClipboard=useCallback(() => {
     pwRef.current?.select()
@@ -72,9 +72,12 @@ function App() {
 
           <div>
 
+            <h3 className=' my-2 font-serif font-semibold text-blue-900 tracking-wider'>Please select the parameters as required:</h3>
+
             <input type="range"
               min={8}
               max={50}
+              value={length}
               onChange={(e) => { setLength(e.target.value) }}
               className='"w-full h-2 bg-gray-200 rounded-lg cursor-pointer"'
             />
@@ -118,6 +121,11 @@ function App() {
             </label>
 
           </div>
+
+          <button className='bg-blue-600 p-2 mt-4 rounded-lg font-semibold  text-blue-50 hover:bg-blue-900 active:bg-blue-300 active:text-blue-800 transition duration-2000'
+          onClick={generatePassword}>
+            Generate Password
+          </button>
 
 
 
